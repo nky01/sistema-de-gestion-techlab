@@ -1,7 +1,7 @@
 package com.techlab.Productos;
 
 public class Producto {
-    private Long id;
+    private int id;
     private String nombre;
     private double precio;
     private int stock;
@@ -9,17 +9,17 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(Long id, String nombre, double precio, int stock) {
+    public Producto(int id, String nombre, double precio, int stock) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;
     }
     
-    public Long getId() {
+    public int getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
     public String getNombre() {
