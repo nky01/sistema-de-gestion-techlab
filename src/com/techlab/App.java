@@ -69,15 +69,15 @@ public class App {
         System.out.println("AGREGAR PRODUCTO");
         System.out.println("===================================");
 
-        int id = leerEntero(sc, "ID del producto: ");
+        int codigo = leerEntero(sc, "Codigo del producto: ");
         
-        if (buscarProductoPorId(id) != null) {
-            System.out.println("Error: Ya existe un producto registrado con el ID " + id);
+        if (buscarProductoPorCodigo(codigo) != null) {
+            System.out.println(codigo);
             return;
         }
 
         Producto producto = new Producto();
-        producto.setId(id);
+        producto.setCodigo(codigo);
 
         System.out.println("Nombre del producto: ");
         String nombre = sc.nextLine();
@@ -118,10 +118,10 @@ public class App {
         System.out.println("ACTUALIZAR PRODUCTO");
         System.out.println("===================================");
         
-        int id = leerEntero(sc, "Ingrese ID del producto que desee actualizar: ");
+        int codigo = leerEntero(sc, "Ingrese el codigo del producto que desee actualizar: ");
 
         for (int i = 0; i < productos.size(); i++) {
-            if(productos.get(i).getId() == id){
+            if(productos.get(i).getCodigo() == codigo){
 
                 System.out.println("Nuevo nombre: ");
                 String nombre = sc.nextLine().trim();
@@ -141,7 +141,7 @@ public class App {
                 return "Producto actualizado!";
             }            
         }
-        return "El producto con ID: " + id + " no existe";
+        return "El producto con ID: " + codigo + " no existe";
     }
 
     public static void eliminarProducto(Scanner sc) {
@@ -149,14 +149,14 @@ public class App {
         System.out.println("ELIMINAR PRODUCTO");
         System.out.println("===================================");
 
-        int id = leerEntero(sc, "Ingrese ID del producto a eliminar: ");
-        Producto producto = buscarProductoPorId(id);
+        int codigo = leerEntero(sc, "Ingrese el codigo del producto a eliminar: ");
+        Producto producto = buscarProductoPorCodigo(codigo);
 
         if (producto != null) {
             productos.remove(producto);
             System.out.println("Producto eliminado correctamente.");
         } else {
-            System.out.println("El producto con ID " + id + " no existe.");
+            System.out.println("El producto con ID " + codigo + " no existe.");
         }
     }
 
@@ -179,7 +179,7 @@ public class App {
         for (int i = 0; i < cantidadTipos; i++) {
             System.out.println("\n--- Producto " + (i + 1) + " de " + cantidadTipos + " ---");
 
-            int idProducto = leerEntero(sc, "Ingrese el ID del producto: ");
+            int codigoProd = leerEntero(sc, "Ingrese el ID del producto: ");
             int cantidad = leerEntero(sc, "Ingrese la cantidad a pedir: ");
 
             if (cantidad <= 0) {
@@ -188,10 +188,10 @@ public class App {
                 continue;
             }
 
-            Producto producto = buscarProductoPorId(idProducto);
+            Producto producto = buscarProductoPorCodigo(codigoProd);
 
             if (producto == null) {
-                System.out.println("Error: El producto con ID " + idProducto + " no existe");
+                System.out.println("Error: El producto con ID " + codigoProd + " no existe");
                 i--;
                 continue;
             }
@@ -212,7 +212,7 @@ public class App {
         }
 
         Pedido pedido = new Pedido();
-        pedido.setId(idPedido);
+        pedido.setCodigo(idPedido);
 
         for (int i = 0; i < productosSeleccionados.size(); i++) {
             Producto prod = productosSeleccionados.get(i);
@@ -242,9 +242,9 @@ public class App {
     }
 
     // ==================================================================
-    private static Producto buscarProductoPorId(int id) {
+    private static Producto buscarProductoPorCodigo(int codigo) {
         for (Producto p : productos) {
-            if (p.getId() == id) {
+            if (p.getCodigo() == codigo) {
                 return p;
             }
         }

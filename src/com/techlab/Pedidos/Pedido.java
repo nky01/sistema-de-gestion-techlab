@@ -6,22 +6,22 @@ import java.util.List;
 import com.techlab.Productos.Producto;
 
 public class Pedido {
-    private int id;
+    private int codigo;
     private List<LineaPedido> lineas = new ArrayList<>();
 
     public Pedido() {
     }
 
-    public Pedido(int id) {
-        this.id = id;
+    public Pedido(int codigo) {
+        this.codigo = codigo;
     }
 
-    public int getId() {
-        return id;
+    public int getCodigo() {
+        return codigo;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public void agregarProducto(Producto producto, int cantidad) {
@@ -38,6 +38,6 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido #" + id + " | Items: " + lineas + " | Total: $" + calcularTotal();
+        return "Pedido Codigo: " + codigo + " | Items: " + lineas + " | Total: $" + calcularTotal();
     }
 }
