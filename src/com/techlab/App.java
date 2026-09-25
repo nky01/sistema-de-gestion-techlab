@@ -1,19 +1,18 @@
 package com.techlab;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-import com.techlab.Excepciones.StockInsuficienteException;
 import com.techlab.Productos.Producto;
 
 public class App {
 
-    private static ArrayList<Producto> productos = new ArrayList<>();
-
     public static void main(String[] args){
 
         Scanner scanner = new Scanner(System.in);
+
+        ArrayList<Producto> productos = new ArrayList<>();
+
         int opcion;
 
         do{
@@ -35,7 +34,7 @@ public class App {
                     ingresarProducto(scanner, productos);
                     break;
                 case 2 : 
-                    listarProductos();
+                    listarProductos(productos);
                     break;
                 case 3 : 
                     consultarProducto(scanner, productos);
@@ -46,8 +45,11 @@ public class App {
                 case 5 : 
                     eliminarProducto(scanner, productos);
                     break;
+                case 0: 
+                    System.out.println("\nSaliendo del sistema. Nos vemos!");
+                    break;
                 default: 
-                    System.out.println("Error: Opcion no valida, intente de nuevo...");
+                    System.out.println("Error: La opcion no es valida, intente de nuevo");
                     break;
             }
         }
@@ -80,7 +82,7 @@ public class App {
     }
 
     // LISTAR LOS PRODUCTOS ======================================================
-    public static ArrayList<Producto> listarProductos(){
+    public static ArrayList<Producto> listarProductos(ArrayList<Producto> productos){
         System.out.println("===================================");
         System.out.println("LISTAR PRODUCTOS");
         System.out.println("===================================");
