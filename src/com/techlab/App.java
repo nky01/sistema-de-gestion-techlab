@@ -69,15 +69,15 @@ public class App {
         System.out.println("AGREGAR PRODUCTO");
         System.out.println("===================================");
 
-        int codigo = leerEntero(sc, "Codigo del producto: ");
+        int id = leerEntero(sc, "ID del producto: ");
         
-        if (buscarProductoPorCodigo(codigo) != null) {
-            System.out.println(codigo);
+        if (buscarProductoPorId(id) != null) {
+            System.out.println("Error: Ya existe un producto registrado con el ID " + id);
             return;
         }
 
         Producto producto = new Producto();
-        producto.setCodigo(codigo);
+        producto.setCodigo(id);
 
         System.out.println("Nombre del producto: ");
         String nombre = sc.nextLine();
@@ -118,10 +118,10 @@ public class App {
         System.out.println("ACTUALIZAR PRODUCTO");
         System.out.println("===================================");
         
-        int codigo = leerEntero(sc, "Ingrese el codigo del producto que desee actualizar: ");
+        int id = leerEntero(sc, "Ingrese ID del producto que desee actualizar: ");
 
         for (int i = 0; i < productos.size(); i++) {
-            if(productos.get(i).getCodigo() == codigo){
+            if(productos.get(i).getCodigo() == id){
 
                 System.out.println("Nuevo nombre: ");
                 String nombre = sc.nextLine().trim();
@@ -141,7 +141,7 @@ public class App {
                 return "Producto actualizado!";
             }            
         }
-        return "El producto con ID: " + codigo + " no existe";
+        return "El producto con ID: " + id + " no existe";
     }
 
     public static void eliminarProducto(Scanner sc) {
@@ -149,14 +149,14 @@ public class App {
         System.out.println("ELIMINAR PRODUCTO");
         System.out.println("===================================");
 
-        int codigo = leerEntero(sc, "Ingrese el codigo del producto a eliminar: ");
-        Producto producto = buscarProductoPorCodigo(codigo);
+        int id = leerEntero(sc, "Ingrese ID del producto a eliminar: ");
+        Producto producto = buscarProductoPorId(id);
 
         if (producto != null) {
             productos.remove(producto);
             System.out.println("Producto eliminado correctamente.");
         } else {
-            System.out.println("El producto con ID " + codigo + " no existe.");
+            System.out.println("El producto con ID " + id + " no existe.");
         }
     }
 
@@ -179,7 +179,7 @@ public class App {
         for (int i = 0; i < cantidadTipos; i++) {
             System.out.println("\n--- Producto " + (i + 1) + " de " + cantidadTipos + " ---");
 
-            int codigoProd = leerEntero(sc, "Ingrese el ID del producto: ");
+            int idProducto = leerEntero(sc, "Ingrese el ID del producto: ");
             int cantidad = leerEntero(sc, "Ingrese la cantidad a pedir: ");
 
             if (cantidad <= 0) {
@@ -188,10 +188,10 @@ public class App {
                 continue;
             }
 
-            Producto producto = buscarProductoPorCodigo(codigoProd);
+            Producto producto = buscarProductoPorId(idProducto);
 
             if (producto == null) {
-                System.out.println("Error: El producto con ID " + codigoProd + " no existe");
+                System.out.println("Error: El producto con ID " + idProducto + " no existe");
                 i--;
                 continue;
             }
@@ -242,10 +242,10 @@ public class App {
     }
 
     // ==================================================================
-    private static Producto buscarProductoPorCodigo(int codigo) {
-        for (Producto p : productos) {
-            if (p.getCodigo() == codigo) {
-                return p;
+    private static Producto buscarProductoPorId(int codigo) {
+        for (Producto producto : productos) {
+            if (producto.getCodigo() == codigo) {
+                return producto;
             }
         }
         return null;
@@ -270,6 +270,39 @@ public class App {
             } catch (NumberFormatException e) {
                 System.out.println("Error: Debe ingresar un numero decimal valido");
             }
+        }
+    }
+
+    public static double leerDoubleNoNegativo(Scanner scanner, String mensaje) {
+
+        while (true) {
+            try {
+                System.out.print(mensaje);
+                double valor = Double.parseDouble(scanner.nextLine());
+
+                if (valor < 0) {
+                    System.out.println("Error: el precio no puede ser negativo.");
+                    continue;
+                }
+
+                return valor;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: debe ingresar un número decimal válido.");
+            }
+        }
+    }
+
+    public static String leerTextoNoVacio(Scanner scanner, String mensaje) {
+
+        while (true) {
+            System.out.print(mensaje);
+            String texto = scanner.nextLine();
+
+            if (!texto.trim().isEmpty()) {
+                return texto.trim();
+            }
+
+            System.out.println("Error: el texto no puede estar vacío.");
         }
     }
 }
