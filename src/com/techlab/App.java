@@ -154,6 +154,7 @@ public class App {
     }
 
     
+    // ELIMINAR PRODUCTO ======================================================
     public static void eliminarProducto(Scanner scanner, ArrayList<Producto> productos) {
         
         System.out.println("===================================");
