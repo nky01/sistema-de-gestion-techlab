@@ -4,16 +4,14 @@ public class Producto {
     private int codigo;
     private String nombre;
     private double precio;
-    private int stock;
 
     public Producto() {
     }
 
-    public Producto(int codigo, String nombre, double precio, int stock) {
+    public Producto(int codigo, String nombre, double precio) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.precio = precio;
-        this.stock = stock;
     }
     
     public int getCodigo() {
@@ -34,16 +32,10 @@ public class Producto {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
-    public int getStock() {
-        return stock;
-    }
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
 
     @Override
     public String toString() {
-        return "ID: " + codigo + " | Nombre: " + nombre + " | Precio: $" + precio + " | Stock: " + stock;
+        return "Codigo: " + codigo + " | Nombre: " + nombre + " | Precio: $" + precio;
     }
   
 }
